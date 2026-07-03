@@ -2,7 +2,7 @@
     <defs>
         <linearGradient id="grad" x1="0%" x2="100%">
             <stop offset="0%" stop-color="#406AAF"/>
-            <stop offset="100%" stop-color="#BE1A1A"/>
+            <stop offset="100%" stop-color="#000000"/>
         </linearGradient>
     </defs>
 
@@ -13,7 +13,7 @@
             font-size="42"
             font-weight="700"
             letter-spacing="1.5"
-            fill="#BE1A1A">
+            fill="#000000">
         Resume<tspan fill="url(#grad)">Craft</tspan>
     </text>
 
@@ -24,7 +24,7 @@
             font-size="18"
             font-weight="600"
             letter-spacing="4"
-            fill="#BE1A1A">
+            fill="#000000">
         AI
     </text>
 </svg>
