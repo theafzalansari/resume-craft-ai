@@ -12,15 +12,15 @@ import { Input } from "@/components/ui/input";
 import { v4 as uuidv4 } from "uuid";
 import GlobalApi from "../../../service/GlobalApi.js";
 import { useUser } from "@clerk/react";
-import {useNavigate, useNavigation} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AddResume = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [resumeTitle, setResumeTitle] = useState("");
     const [loading, setLoading] = useState(false);
-    const navigation = useNavigate();
 
     const { user } = useUser();
+    const navigation = useNavigate();
 
     const onCreate = async () => {
         setLoading(true);
@@ -43,8 +43,14 @@ const AddResume = () => {
 
             console.log("Strapi response:", res.data);
 
+            const documentId = res.data.data.documentId;
+
+            console.log("Document ID:", documentId);
+
             setOpenDialog(false);
             setResumeTitle("");
+
+            navigation(`/dashboard/resume/${documentId}/edit`);
         } catch (error) {
             console.error(
                 "Error creating resume:",
@@ -52,7 +58,6 @@ const AddResume = () => {
             );
         } finally {
             setLoading(false);
-            navigation(`/dashboard/resume/`+uuid+"/edit");
         }
     };
 
