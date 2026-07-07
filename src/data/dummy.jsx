@@ -1,12 +1,12 @@
 export default{
     firstName:'James',
     lastName:'Carter',
-    jobTitle:'full stack developer',
+    jobTitle:'Full Stack Developer',
     address:'525 N tryon Street, NC 28117',
     phone:'(123)-456-7890',
     email:'exmaple@gmail.com',
     themeColor:"#ff6666",
-    summery:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    summary:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     experience:[
         {
             id:1,
@@ -46,7 +46,7 @@ export default{
             id:1,
             universityName:'Western Illinois University',
             startDate:'Aug 2018',
-            endDate:'Dec:2019',
+            endDate:'Dec 2019',
             degree:'Master',
             major:'Computer Science',
             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
@@ -55,7 +55,7 @@ export default{
             id:2,
             universityName:'Western Illinois University',
             startDate:'Aug 2018',
-            endDate:'Dec:2019',
+            endDate:'Dec 2019',
             degree:'Master',
             major:'Computer Science',
             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
@@ -81,6 +81,26 @@ export default{
             id:1,
             name:'React Native',
             rating:100,
+        }
+    ],
+    projects:[
+        {
+            id:1,
+            name:'E-Commerce Platform',
+            description:'A full-stack e-commerce application built with React, Node.js, and MongoDB.',
+            techStack:['React', 'Node.js', 'Express', 'MongoDB'],
+            githubLink:'https://github.com/jamescarter/ecommerce-platform',
+            startDate:'Jun 2022',
+            endDate:'Sep 2022'
+        },
+        {
+            id:2,
+            name:'Task Management Dashboard',
+            description:'A responsive task management application with real-time updates.',
+            techStack:['Angular', 'Firebase', 'Tailwind CSS'],
+            githubLink:'https://github.com/jamescarter/task-dashboard',
+            startDate:'Jan 2023',
+            endDate:'Mar 2023'
         }
     ]
 }
