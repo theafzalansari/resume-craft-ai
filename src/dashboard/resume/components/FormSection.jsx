@@ -3,6 +3,7 @@ import PersonalDetail from "@/dashboard/resume/components/forms/PersonalDetail.j
 import {Button} from "@/components/ui/button";
 import {ArrowLeft, ArrowRight, LayoutGridIcon} from "lucide-react";
 import {useState} from "react";
+import Summary from "@/dashboard/resume/components/forms/Summary.jsx";
 
 const FormSection = () => {
 
@@ -30,9 +31,9 @@ const FormSection = () => {
             </div>
 
             {/*Personal Detail*/}
-            {activeFormIndex==1? <PersonalDetail enabledNext={(v)=>setEnableNext(v)} /> : null}
+            {activeFormIndex==1? <PersonalDetail enabledNext={(v)=>setEnableNext(v)} />
+                : activeFormIndex==2? <Summary enabledNext={(v)=>setEnableNext(v)}/> : null}
 
-            {/*Summary*/}
 
             {/*Experience*/}
 
