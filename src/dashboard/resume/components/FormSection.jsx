@@ -7,6 +7,7 @@ import Summary from "@/dashboard/resume/components/forms/Summary.jsx";
 import Experience from "@/dashboard/resume/components/forms/Experience.jsx";
 import Education from "@/dashboard/resume/components/forms/Education.jsx";
 import Skills from "@/dashboard/resume/components/forms/Skills.jsx";
+import Projects from "@/dashboard/resume/components/forms/Projects.jsx";
 
 const FormSection = () => {
 
@@ -38,7 +39,8 @@ const FormSection = () => {
                 : activeFormIndex == 2 ? <Summary enabledNext={(v) => setEnableNext(v)}/>
                     : activeFormIndex == 3 ? <Experience enabledNext={(v) => setEnableNext(v)}/>
                         : activeFormIndex == 4 ? <Education enabledNext={(v) => setEnableNext(v)}/>
-                            :activeFormIndex == 5 ? <Skills enabledNext={(v) => setEnableNext(v)}/> : null
+                            :activeFormIndex == 5 ? <Skills enabledNext={(v) => setEnableNext(v)}/>
+                                : activeFormIndex==6 ? <Projects enabledNext={(v) => setEnableNext(v)}/> : null
             }
 
 

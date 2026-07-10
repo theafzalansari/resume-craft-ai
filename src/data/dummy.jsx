@@ -89,7 +89,6 @@ export default{
             name:'E-Commerce Platform',
             description:'A full-stack e-commerce application built with React, Node.js, and MongoDB.',
             techStack:['React', 'Node.js', 'Express', 'MongoDB'],
-            githubLink:'https://github.com/jamescarter/ecommerce-platform',
             startDate:'Jun 2022',
             endDate:'Sep 2022'
         },
@@ -98,7 +97,6 @@ export default{
             name:'Task Management Dashboard',
             description:'A responsive task management application with real-time updates.',
             techStack:['Angular', 'Firebase', 'Tailwind CSS'],
-            githubLink:'https://github.com/jamescarter/task-dashboard',
             startDate:'Jan 2023',
             endDate:'Mar 2023'
         }
