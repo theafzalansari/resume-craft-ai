@@ -5,6 +5,7 @@ import {ArrowLeft, ArrowRight, LayoutGridIcon} from "lucide-react";
 import {useState} from "react";
 import Summary from "@/dashboard/resume/components/forms/Summary.jsx";
 import Experience from "@/dashboard/resume/components/forms/Experience.jsx";
+import Education from "@/dashboard/resume/components/forms/Education.jsx";
 
 const FormSection = () => {
 
@@ -34,7 +35,8 @@ const FormSection = () => {
             {/*Personal Detail*/}
             {activeFormIndex==1? <PersonalDetail enabledNext={(v)=>setEnableNext(v)} />
                 : activeFormIndex==2? <Summary enabledNext={(v)=>setEnableNext(v)}/>
-                    : activeFormIndex==3? <Experience enabledNext={(v)=>setEnableNext(v)} /> :null
+                    : activeFormIndex==3? <Experience enabledNext={(v)=>setEnableNext(v)} />
+                        :activeFormIndex==4? <Education enabledNext={(v)=>setEnableNext(v)} /> : null
             }
 
 
