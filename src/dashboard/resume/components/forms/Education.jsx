@@ -17,16 +17,21 @@ const formField = {
     description: "",
 };
 
-function Education() {
+function Education({enabledNext}) {
     const [loading, setLoading] = useState(false);
     const [educationalList, setEducationalList] = useState([
         { ...formField }
     ]);
 
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+    const isFormEmpty = educationalList.every((item) =>
+        Object.values(item).every((value) => !value)
+    );
     const params = useParams();
 
     const handleChange = (event, index) => {
+        enabledNext(false);
+
         const { name, value } = event.target;
         const newEntries = [...educationalList];
 
@@ -64,6 +69,7 @@ function Education() {
             (res) => {
                 console.log(res);
                 setLoading(false);
+                enabledNext(true);
                 toast.success("Details updated successfully.");
             },
             (error) => {
@@ -169,7 +175,7 @@ function Education() {
                     </Button>
                 </div>
 
-                <Button disabled={loading} onClick={onSave}>
+                <Button disabled={loading || isFormEmpty} onClick={onSave}>
                     {loading ? (
                         <LoaderCircle className="animate-spin" />
                     ) : (
