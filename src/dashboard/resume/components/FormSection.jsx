@@ -6,6 +6,7 @@ import {useState} from "react";
 import Summary from "@/dashboard/resume/components/forms/Summary.jsx";
 import Experience from "@/dashboard/resume/components/forms/Experience.jsx";
 import Education from "@/dashboard/resume/components/forms/Education.jsx";
+import Skills from "@/dashboard/resume/components/forms/Skills.jsx";
 
 const FormSection = () => {
 
@@ -27,24 +28,19 @@ const FormSection = () => {
                     <Button
                         disabled={!enableNext}
                         className='flex gap-2' size="sm"
-                            onClick={() => setActiveFormIndex(activeFormIndex + 1)}
+                        onClick={() => setActiveFormIndex(activeFormIndex + 1)}
                     >Next <ArrowRight/></Button>
                 </div>
             </div>
 
             {/*Personal Detail*/}
-            {activeFormIndex==1? <PersonalDetail enabledNext={(v)=>setEnableNext(v)} />
-                : activeFormIndex==2? <Summary enabledNext={(v)=>setEnableNext(v)}/>
-                    : activeFormIndex==3? <Experience enabledNext={(v)=>setEnableNext(v)} />
-                        :activeFormIndex==4? <Education enabledNext={(v)=>setEnableNext(v)} /> : null
+            {activeFormIndex == 1 ? <PersonalDetail enabledNext={(v) => setEnableNext(v)}/>
+                : activeFormIndex == 2 ? <Summary enabledNext={(v) => setEnableNext(v)}/>
+                    : activeFormIndex == 3 ? <Experience enabledNext={(v) => setEnableNext(v)}/>
+                        : activeFormIndex == 4 ? <Education enabledNext={(v) => setEnableNext(v)}/>
+                            :activeFormIndex == 5 ? <Skills enabledNext={(v) => setEnableNext(v)}/> : null
             }
 
-
-            {/*Experience*/}
-
-            {/*Education*/}
-
-            {/*Skills*/}
 
             {/*Projects*/}
 
