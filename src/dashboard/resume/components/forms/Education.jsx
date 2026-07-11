@@ -80,7 +80,7 @@ function Education({ enabledNext }) {
 
         const data = {
             data: {
-                education: educationalList,
+                education: educationalList.map(({ id, ...rest }) => rest),
             },
         };
 
@@ -92,7 +92,7 @@ function Education({ enabledNext }) {
                 toast.success("Details updated successfully.");
             },
             (error) => {
-                console.error(error);
+                console.log(error.response?.data);
                 setLoading(false);
                 enabledNext(false);
                 toast.error("Error updating resume details.");

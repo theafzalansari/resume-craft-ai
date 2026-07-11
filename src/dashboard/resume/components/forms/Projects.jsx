@@ -75,7 +75,7 @@ const Projects = ({enabledNext}) => {
 
         const data = {
             data: {
-                projects: projectsList
+                projects: projectsList.map(({ id, ...rest }) => rest)
             }
         };
 

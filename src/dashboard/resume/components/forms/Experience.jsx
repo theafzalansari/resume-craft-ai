@@ -91,7 +91,7 @@ const Experience = ({ enabledNext }) => {
 
         const data = {
             data: {
-                experience: experienceList,
+                experience: experienceList.map(({ id, ...rest }) => rest)
             },
         };
 
@@ -103,7 +103,9 @@ const Experience = ({ enabledNext }) => {
                 toast.success("Details updated successfully.");
             },
             (error) => {
-                console.error(error);
+                console.log(error.response);
+                console.log(error.response?.data);
+                console.log(error.response?.data?.error);
                 setLoading(false);
                 enabledNext(false);
                 toast.error("Error updating resume details.");
