@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const ResumeCardItem = ({resume}) => {
     return (
         <Link to={`/dashboard/resume/`+resume.documentId+"/edit"}>
-            <div className='p-14 border-t-[15px]
+            <div className='p-14 border-t-[10px]
 
           bg-gradient-to-r from-red-500 to-sky-500
 

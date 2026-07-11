@@ -17,22 +17,35 @@ const formField = {
     description: "",
 };
 
-function Education({enabledNext}) {
+function Education({ enabledNext }) {
+    const params = useParams();
+    const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+
     const [loading, setLoading] = useState(false);
+    const [dataLoaded, setDataLoaded] = useState(false);
+
     const [educationalList, setEducationalList] = useState([
-        { ...formField }
+        { ...formField },
     ]);
 
-    const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-    const isFormEmpty = educationalList.every((item) =>
-        Object.values(item).every((value) => !value)
-    );
-    const params = useParams();
+    const isFormEmpty =
+        !educationalList ||
+        educationalList.every((item) =>
+            Object.values(item).every((value) => !value)
+        );
+
+    useEffect(() => {
+        if (resumeInfo?.education?.length) {
+            setEducationalList(resumeInfo.education);
+            setDataLoaded(true);
+        }
+    }, [resumeInfo]);
 
     const handleChange = (event, index) => {
         enabledNext(false);
 
         const { name, value } = event.target;
+
         const newEntries = [...educationalList];
 
         newEntries[index] = {
@@ -44,15 +57,21 @@ function Education({enabledNext}) {
     };
 
     const AddNewEducation = () => {
+        enabledNext(false);
+
         setEducationalList([
             ...educationalList,
-            { ...formField }
+            { ...formField },
         ]);
     };
 
     const RemoveEducation = () => {
+        enabledNext(false);
+
         if (educationalList.length > 1) {
-            setEducationalList(educationalList.slice(0, -1));
+            setEducationalList(
+                educationalList.slice(0, -1)
+            );
         }
     };
 
@@ -75,17 +94,20 @@ function Education({enabledNext}) {
             (error) => {
                 console.error(error);
                 setLoading(false);
+                enabledNext(false);
                 toast.error("Error updating resume details.");
             }
         );
     };
 
     useEffect(() => {
-        setResumeInfo((prevResumeInfo) => ({
-            ...prevResumeInfo,
+        if (!dataLoaded) return;
+
+        setResumeInfo((prev) => ({
+            ...prev,
             education: educationalList,
         }));
-    }, [educationalList, setResumeInfo]);
+    }, [educationalList, dataLoaded]);
 
     return (
         <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
@@ -175,7 +197,10 @@ function Education({enabledNext}) {
                     </Button>
                 </div>
 
-                <Button disabled={loading || isFormEmpty} onClick={onSave}>
+                <Button
+                    disabled={loading || isFormEmpty}
+                    onClick={onSave}
+                >
                     {loading ? (
                         <LoaderCircle className="animate-spin" />
                     ) : (

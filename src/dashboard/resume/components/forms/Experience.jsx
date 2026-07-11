@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
+import React, { useContext, useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import RichTextEditor from "@/dashboard/resume/components/RichTextEditor.jsx";
-import {ResumeInfoContext} from "@/context/ResumeInfoContext.jsx";
-import {LoaderCircle} from "lucide-react";
-import {useParams} from "react-router-dom";
+import { ResumeInfoContext } from "@/context/ResumeInfoContext.jsx";
+import { LoaderCircle } from "lucide-react";
+import { useParams } from "react-router-dom";
 import GlobalApi from "../../../../../service/GlobalApi.js";
-import {toast} from "sonner";
+import { toast } from "sonner";
 
 const formField = {
     title: "",
@@ -18,25 +18,35 @@ const formField = {
     workSummery: "",
 };
 
-const Experience = ({enabledNext}) => {
+const Experience = ({ enabledNext }) => {
     const [loading, setLoading] = useState(false);
     const params = useParams();
 
-    const [experienceList, setExperienceList] = useState([
-        {...formField}
-    ]);
+    const [experienceList, setExperienceList] = useState([{ ...formField }]);
 
-    const {resumeInfo, setResumeInfo} = useContext(ResumeInfoContext);
+    const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
-    const isFormEmpty = experienceList.every((item) =>
-        Object.values(item).every((value) => !value)
-    );
+    const isFormEmpty =
+        !experienceList ||
+        experienceList.every((item) =>
+            Object.values(item).every((value) => !value)
+        );
+
+    const [dataLoaded, setDataLoaded] = useState(false);
+
+    useEffect(() => {
+        if (!dataLoaded && resumeInfo?.experience) {
+            setExperienceList(resumeInfo.experience);
+            setDataLoaded(true);
+        }
+    }, [resumeInfo, dataLoaded]);
 
     const handleChange = (index, event) => {
         enabledNext(false);
 
+        const { name, value } = event.target;
+
         const newEntries = [...experienceList];
-        const {name, value} = event.target;
 
         newEntries[index] = {
             ...newEntries[index],
@@ -64,7 +74,7 @@ const Experience = ({enabledNext}) => {
 
         setExperienceList([
             ...experienceList,
-            {...formField},
+            { ...formField }
         ]);
     };
 
@@ -72,9 +82,7 @@ const Experience = ({enabledNext}) => {
         enabledNext(false);
 
         if (experienceList.length > 1) {
-            setExperienceList(
-                experienceList.slice(0, -1)
-            );
+            setExperienceList(experienceList.slice(0, -1));
         }
     };
 
@@ -104,11 +112,13 @@ const Experience = ({enabledNext}) => {
     };
 
     useEffect(() => {
-        setResumeInfo({
-            ...resumeInfo,
-            experience: experienceList
-        });
-    }, [experienceList]);
+        if (!dataLoaded) return;
+
+        setResumeInfo((prevResumeInfo) => ({
+            ...prevResumeInfo,
+            experience: experienceList,
+        }));
+    }, [experienceList, dataLoaded]);
 
     return (
         <div>
@@ -123,6 +133,7 @@ const Experience = ({enabledNext}) => {
                     {experienceList.map((item, index) => (
                         <div key={index}>
                             <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
+
                                 <div>
                                     <label className="text-xs">
                                         Position Title
@@ -212,6 +223,7 @@ const Experience = ({enabledNext}) => {
                                 <div className="col-span-2">
                                     <RichTextEditor
                                         jobTitle={item.title}
+                                        value={item.workSummery}
                                         onRichTextEditorChange={(event) =>
                                             handleRichTextEditor(
                                                 event,
@@ -221,6 +233,7 @@ const Experience = ({enabledNext}) => {
                                         }
                                     />
                                 </div>
+
                             </div>
                         </div>
                     ))}
@@ -228,6 +241,7 @@ const Experience = ({enabledNext}) => {
 
                 <div className="flex justify-between">
                     <div className="flex gap-2">
+
                         <Button
                             variant="outline"
                             onClick={AddNewExperience}
@@ -244,6 +258,7 @@ const Experience = ({enabledNext}) => {
                         >
                             - Remove Experience
                         </Button>
+
                     </div>
 
                     <Button
@@ -251,12 +266,13 @@ const Experience = ({enabledNext}) => {
                         onClick={onSave}
                     >
                         {loading ? (
-                            <LoaderCircle className="animate-spin"/>
+                            <LoaderCircle className="animate-spin" />
                         ) : (
                             "Save"
                         )}
                     </Button>
                 </div>
+
             </div>
         </div>
     );

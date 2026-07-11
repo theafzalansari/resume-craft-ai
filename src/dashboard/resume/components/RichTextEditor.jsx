@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import Editor, {
     BtnBold,
     BtnItalic,
@@ -18,39 +17,33 @@ import { toast } from "sonner";
 
 import AIModel from "../../../../service/AIModal.js";
 
-
 export default function RichTextEditor({
-                                           onRichTextEditorChange,
+                                           value: defaultValue,
                                            jobTitle,
+                                           onRichTextEditorChange,
                                        }) {
 
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState(defaultValue || "");
 
     const [aiLoading, setAiLoading] = useState(false);
 
+    useEffect(() => {
+        setValue(defaultValue || "");
+    }, [defaultValue]);
 
     function onChange(e) {
-
         setValue(e.target.value);
-
         onRichTextEditorChange(e);
-
     }
-
 
     const GenerateWorkSummaryFromAI = async () => {
 
-        if (!jobTitle) {
-
+        if (!jobTitle?.trim()) {
             toast.error("Please enter Position Title first");
-
             return;
-
         }
 
-
         setAiLoading(true);
-
 
         const prompt = `
 Generate a professional work experience summary for this job title:
@@ -67,21 +60,12 @@ Requirements:
 - Do not add headings.
 `;
 
-
         try {
 
             const response =
                 await AIModel.GenerateAIContent(prompt);
 
-
-            console.log(
-                "AI Work Summary:",
-                response
-            );
-
-
             setValue(response);
-
 
             onRichTextEditorChange({
                 target: {
@@ -89,29 +73,18 @@ Requirements:
                 },
             });
 
-
         } catch (error) {
 
-            console.error(
-                "AI Error:",
-                error
-            );
+            console.error(error);
 
-
-            toast.error(
-                "Failed to generate work summary"
-            );
+            toast.error("Failed to generate work summary");
 
         }
 
-
         setAiLoading(false);
-
     };
 
-
     return (
-
         <div>
 
             <div className="flex justify-between my-2">
@@ -119,7 +92,6 @@ Requirements:
                 <label className="text-xs">
                     Summary
                 </label>
-
 
                 <Button
                     type="button"
@@ -131,13 +103,9 @@ Requirements:
                 >
 
                     {aiLoading ? (
-
                         <LoaderIcon className="h-4 w-4 animate-spin" />
-
                     ) : (
-
                         <Brain className="h-4 w-4" />
-
                     )}
 
                     Generate from AI
@@ -145,7 +113,6 @@ Requirements:
                 </Button>
 
             </div>
-
 
             <Editor
                 value={value}
@@ -177,7 +144,5 @@ Requirements:
             </Editor>
 
         </div>
-
     );
-
 }

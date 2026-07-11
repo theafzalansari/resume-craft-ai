@@ -1,31 +1,40 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Input} from "@/components/ui/input";
-import {Rating} from "@smastrom/react-rating";
+import React, { useContext, useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import {Button} from "@/components/ui/button.jsx";
-import {LoaderCircle} from "lucide-react";
-import {ResumeInfoContext} from "@/context/ResumeInfoContext.jsx";
+import { Button } from "@/components/ui/button.jsx";
+import { LoaderCircle } from "lucide-react";
+import { ResumeInfoContext } from "@/context/ResumeInfoContext.jsx";
 import GlobalApi from "../../../../../service/GlobalApi.js";
-import {useParams} from "react-router-dom";
-import {toast} from "sonner";
+import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const formField = {
     name: "",
-    rating: 0
+    rating: 0,
 };
 
-const Skills = ({enabledNext}) => {
-    const [skillsList, setSkillsList] = useState([
-        {...formField}
-    ]);
+const Skills = ({ enabledNext }) => {
     const [loading, setLoading] = useState(false);
+    const [dataLoaded, setDataLoaded] = useState(false);
 
-    const {setResumeInfo} = useContext(ResumeInfoContext);
+    const [skillsList, setSkillsList] = useState([{ ...formField }]);
+
+    const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
     const params = useParams();
 
-    const isFormEmpty = skillsList.every((item) =>
-        Object.values(item).every((value) => !value)
-    );
+    const isFormEmpty =
+        !skillsList ||
+        skillsList.every((item) =>
+            Object.values(item).every((value) => !value)
+        );
+
+    useEffect(() => {
+        if (resumeInfo?.skills?.length) {
+            setSkillsList(resumeInfo.skills);
+            setDataLoaded(true);
+        }
+    }, [resumeInfo]);
 
     const handleChange = (index, name, value) => {
         enabledNext(false);
@@ -34,7 +43,7 @@ const Skills = ({enabledNext}) => {
 
         newEntries[index] = {
             ...newEntries[index],
-            [name]: value
+            [name]: value,
         };
 
         setSkillsList(newEntries);
@@ -45,7 +54,7 @@ const Skills = ({enabledNext}) => {
 
         setSkillsList([
             ...skillsList,
-            {...formField}
+            { ...formField },
         ]);
     };
 
@@ -53,9 +62,7 @@ const Skills = ({enabledNext}) => {
         enabledNext(false);
 
         if (skillsList.length > 1) {
-            setSkillsList(
-                skillsList.slice(0, -1)
-            );
+            setSkillsList(skillsList.slice(0, -1));
         }
     };
 
@@ -64,14 +71,11 @@ const Skills = ({enabledNext}) => {
 
         const data = {
             data: {
-                skills: skillsList
-            }
+                skills: skillsList,
+            },
         };
 
-        GlobalApi.UpdateResumeDetail(
-            params.resumeid,
-            data
-        ).then(
+        GlobalApi.UpdateResumeDetail(params.resumeid, data).then(
             (res) => {
                 console.log(res);
                 setLoading(false);
@@ -88,17 +92,17 @@ const Skills = ({enabledNext}) => {
     };
 
     useEffect(() => {
-        setResumeInfo((prevResumeInfo) => ({
-            ...prevResumeInfo,
-            skills: skillsList
+        if (!dataLoaded) return;
+
+        setResumeInfo((prev) => ({
+            ...prev,
+            skills: skillsList,
         }));
-    }, [skillsList, setResumeInfo]);
+    }, [skillsList, dataLoaded]);
 
     return (
         <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
-            <h2 className="font-bold text-lg">
-                Professional Skills
-            </h2>
+            <h2 className="font-bold text-lg">Professional Skills</h2>
 
             <p>Add Your top professional key skills</p>
 
@@ -108,13 +112,10 @@ const Skills = ({enabledNext}) => {
                         key={index}
                         className="flex justify-between items-center border rounded-lg p-3 py-2 mb-2"
                     >
-                        <div>
-                            <label className="text-xs">
-                                Name
-                            </label>
+                        <div className="w-[45%]">
+                            <label className="text-xs">Name</label>
 
                             <Input
-                                className="w-full"
                                 value={item.name}
                                 onChange={(e) =>
                                     handleChange(
@@ -127,14 +128,10 @@ const Skills = ({enabledNext}) => {
                         </div>
 
                         <Rating
-                            style={{maxWidth: 120}}
+                            style={{ maxWidth: 120 }}
                             value={item.rating}
                             onChange={(value) =>
-                                handleChange(
-                                    index,
-                                    "rating",
-                                    value
-                                )
+                                handleChange(index, "rating", value)
                             }
                         />
                     </div>
@@ -166,7 +163,7 @@ const Skills = ({enabledNext}) => {
                     onClick={onSave}
                 >
                     {loading ? (
-                        <LoaderCircle className="animate-spin"/>
+                        <LoaderCircle className="animate-spin" />
                     ) : (
                         "Save"
                     )}

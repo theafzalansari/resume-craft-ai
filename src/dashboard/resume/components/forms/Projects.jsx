@@ -21,13 +21,21 @@ const Projects = ({enabledNext}) => {
         {...formField}
     ]);
     const [loading, setLoading] = useState(false);
+    const [dataLoaded, setDataLoaded] = useState(false);
 
-    const {setResumeInfo} = useContext(ResumeInfoContext);
+    const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
     const params = useParams();
 
     const isFormEmpty = projectsList.every((item) =>
         Object.values(item).every((value) => !value)
     );
+
+    useEffect(() => {
+        if (resumeInfo?.projects?.length) {
+            setProjectsList(resumeInfo.projects);
+            setDataLoaded(true);
+        }
+    }, [resumeInfo]);
 
     const handleChange = (index, event) => {
         enabledNext(false);
@@ -90,11 +98,13 @@ const Projects = ({enabledNext}) => {
     };
 
     useEffect(() => {
+        if (!dataLoaded) return;
+
         setResumeInfo((prevResumeInfo) => ({
             ...prevResumeInfo,
             projects: projectsList
         }));
-    }, [projectsList, setResumeInfo]);
+    }, [projectsList,dataLoaded, setResumeInfo]);
 
     return (
         <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
