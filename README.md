@@ -222,7 +222,7 @@ VITE_GEMINI_API_KEY=
 
 ## 🌐 Live Demo
 
-> 🚧 **Coming Soon** — a live deployed link will be added here once available.
+> https://resume-craft-ai-eta.vercel.app/
 
 ---
 
