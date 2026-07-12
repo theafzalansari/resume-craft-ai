@@ -33,7 +33,7 @@ const Dashboard = () => {
             mt-10 gap-5'>
                 <AddResume />
                 {resumeList.length>0&&resumeList.map((resume, index) => (
-                    <ResumeCardItem resume={resume} key={index} />
+                    <ResumeCardItem resume={resume} key={index} refreshData={GetResumesList} />
                 ))}
             </div>
         </div>
