@@ -1,13 +1,24 @@
-import React from 'react'
-import {UserButton} from "@clerk/react";
-import Header from "@/components/custom/Header.jsx";
+import Header from "@/components/custom/Header";
+import Hero from "@/components/landing/Hero";
+import Features from "@/components/landing/Features";
+import HowItWorks from "@/components/landing/HowItWorks";
+import CTA from "@/components/landing/CTA";
+import Footer from "@/components/landing/Footer";
 
 const Home = () => {
     return (
-        <div>
+        <>
             <Header />
-            Landing page
-        </div>
-    )
-}
-export default Home
+
+            <main className="overflow-x-hidden">
+                <Hero />
+                <Features />
+                <HowItWorks />
+                <CTA />
+                <Footer />
+            </main>
+        </>
+    );
+};
+
+export default Home;
