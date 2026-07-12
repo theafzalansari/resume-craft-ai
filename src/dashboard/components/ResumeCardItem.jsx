@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {FileText, MoreVertical, Pencil, Trash2, Download, EyeIcon, Loader2, Loader2Icon} from "lucide-react";
+import {FileText, MoreVertical, Pencil, Trash2, Download, EyeIcon, Loader2Icon} from "lucide-react";
 import {Link, useNavigate} from "react-router-dom";
 import {
     DropdownMenu,
@@ -17,7 +17,6 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import GlobalApi from "../../../service/GlobalApi.js";
 import {toast} from "sonner";
