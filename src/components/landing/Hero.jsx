@@ -10,12 +10,11 @@ const Hero = () => {
             <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-violet-500/20 blur-[120px]" />
             <div className="absolute bottom-0 -right-32 h-96 w-96 rounded-full bg-cyan-500/20 blur-[120px]" />
 
-            <div className="relative container mx-auto px-6 py-24 lg:py-32">
+            <div className="relative container mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-32">
 
-                <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
                     {/* LEFT */}
-
                     <div>
 
                         <div className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm mb-6 bg-background">
@@ -23,7 +22,7 @@ const Hero = () => {
                             AI Powered Resume Builder
                         </div>
 
-                        <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
 
                             Build Your Dream Resume
 
@@ -33,7 +32,7 @@ const Hero = () => {
 
                         </h1>
 
-                        <p className="mt-8 text-lg text-muted-foreground leading-8 max-w-xl">
+                        <p className="mt-6 sm:mt-8 text-base sm:text-lg text-muted-foreground leading-7 sm:leading-8 max-w-xl">
 
                             Create ATS-friendly resumes in minutes.
                             Generate professional summaries, work experiences,
@@ -42,13 +41,13 @@ const Hero = () => {
 
                         </p>
 
-                        <div className="flex gap-4 mt-10">
+                        <div className="flex mt-8 sm:mt-10">
 
-                            <Link to="/dashboard">
+                            <Link to="/dashboard" className="w-full sm:w-auto">
 
                                 <Button
                                     size="lg"
-                                    className="gap-2"
+                                    className="gap-2 w-full sm:w-auto"
                                 >
                                     Get Started
                                     <ArrowRight className="w-4 h-4" />
@@ -56,24 +55,16 @@ const Hero = () => {
 
                             </Link>
 
-                            {/*<Button*/}
-                            {/*    variant="outline"*/}
-                            {/*    size="lg"*/}
-                            {/*>*/}
-                            {/*    View Demo*/}
-                            {/*</Button>*/}
-
                         </div>
 
                     </div>
 
                     {/* RIGHT */}
-
                     <div className="relative flex justify-center">
 
                         {/* Resume Card */}
 
-                        <div className="w-[420px] rounded-3xl bg-white shadow-2xl border p-8 rotate-2 hover:rotate-0 transition duration-300">
+                        <div className="w-full max-w-[420px] rounded-3xl bg-white shadow-2xl border p-6 sm:p-8 rotate-2 hover:rotate-0 transition duration-300">
 
                             <h2 className="text-2xl font-bold">
                                 Afzal Ansari
@@ -141,19 +132,19 @@ const Hero = () => {
 
                         {/* Floating Cards */}
 
-                        <div className="absolute -top-6 -right-8 rounded-xl bg-white shadow-lg border px-4 py-2 animate-bounce">
+                        <div className="hidden sm:block absolute -top-6 -right-8 rounded-xl bg-white shadow-lg border px-4 py-2 animate-bounce">
 
                             ✨ AI Generated
 
                         </div>
 
-                        <div className="absolute top-1/2 -left-8 rounded-xl bg-white shadow-lg border px-4 py-2">
+                        <div className="hidden sm:block absolute top-1/2 -left-8 rounded-xl bg-white shadow-lg border px-4 py-2">
 
                             ✅ ATS Friendly
 
                         </div>
 
-                        <div className="absolute -bottom-6 right-4 rounded-xl bg-white shadow-lg border px-4 py-2">
+                        <div className="hidden sm:block absolute -bottom-6 right-4 rounded-xl bg-white shadow-lg border px-4 py-2">
 
                             🎨 20+ Themes
 

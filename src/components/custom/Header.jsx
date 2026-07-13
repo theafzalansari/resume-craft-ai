@@ -18,15 +18,22 @@ const Header = () => {
 
     return (
         <header className="sticky top-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/60 supports-[backdrop-filter]:bg-background/60">
-            <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3.5">
+            <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3.5">
 
                 {/* Logo */}
                 <Link to="/" className="flex items-center gap-2.5 group">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-fuchsia-500 to-sky-500 flex items-center justify-center shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
                         <FileText className="w-4.5 h-4.5 text-white" strokeWidth={2} />
                     </div>
-                    <span className="text-lg font-semibold tracking-tight">
-                        ResumeCraft <span className="text-primary">AI</span>
+
+                    <span className="font-semibold tracking-tight text-base sm:text-lg">
+                        <span className="hidden sm:inline">
+                            ResumeCraft <span className="text-primary">AI</span>
+                        </span>
+
+                        <span className="sm:hidden">
+                            Resume<span className="text-primary">AI</span>
+                        </span>
                     </span>
                 </Link>
 
@@ -47,21 +54,29 @@ const Header = () => {
 
                 {/* Auth actions */}
                 {isSignedIn ? (
-                    <div className="flex gap-3 items-center">
+                    <div className="flex items-center gap-3">
                         {!isHomePage && (
                             <Link to="/dashboard">
-                                <Button variant="outline" size="sm" className="shadow-sm">
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="shadow-sm"
+                                >
                                     Dashboard
                                 </Button>
                             </Link>
                         )}
+
                         <div className="ring-2 ring-border/60 rounded-full transition-all hover:ring-primary/40">
                             <UserButton />
                         </div>
                     </div>
                 ) : (
                     <Link to="/auth/sign-in">
-                        <Button size="sm" className="shadow-sm hover:shadow-md transition-shadow px-5">
+                        <Button
+                            size="sm"
+                            className="px-3 sm:px-5 shadow-sm hover:shadow-md transition-shadow"
+                        >
                             Get Started
                         </Button>
                     </Link>
